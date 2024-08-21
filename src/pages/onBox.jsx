@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import SubView from '../components/SubView';
 import MainPage from '../components/Main';
-import SideBar from '../components/SideBar';
+import SideBar from '../components/sidebar';
 import TopBar from '../components/TopBar';
 
 function OneBox() {
