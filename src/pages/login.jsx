@@ -18,7 +18,7 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     // Redirect to Google login URL
-    window.location.href = "https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=richinbox-hjn5.vercel.app";
+    window.location.href = "https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=https://richinbox-hjn5.vercel.app/onBox";
   };
 
   return (
