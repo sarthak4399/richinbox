@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import LoginPageBar from '../Components/LoginPageBar';
 import Image from 'next/image';
-import google from '../assets/google.svg';
+import google from '../Assets/google.svg';
 import Link from 'next/link';
 
 const Login = () => {
