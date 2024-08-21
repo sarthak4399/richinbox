@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import LoginPageBar from '../components/LoginPageBar';
+import LoginPageBar from '../Components/LoginPageBar';
 import Image from 'next/image';
 import google from '../assets/google.svg';
 import Link from 'next/link';
@@ -56,3 +56,4 @@ const Login = () => {
 };
 
 export default Login;
+

@@ -8,7 +8,7 @@ import inbox_icon from "../Assets/inbox.png";
 import stack_icon from "../Assets/stack.png";
 import barchart_icon from "../Assets/bar_chart.png";
 import Mail_logo from "../Assets/mail_icon.png";
-import profile_icon from "../Assets/profile.png";
+import profile_icon from "../Assets/Profile.png";
 
 const SideBar = ({ onMenuItemClick }) => {
   const router = useRouter();
