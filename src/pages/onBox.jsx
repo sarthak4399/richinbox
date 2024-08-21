@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import SubView from '../components/SubView';
-import MainPage from '../components/Main';
-import SideBar from '../components/sidebar';
-import TopBar from '../components/TopBar';
+import SubView from '../Components/SubView';
+import MainPage from '../Components/Main';
+import SideBar from '../Components/sidebar';
+import TopBar from '../Components/TopBar';
 
 function OneBox() {
   const router = useRouter();
