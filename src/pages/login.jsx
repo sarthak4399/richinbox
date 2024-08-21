@@ -1,46 +1,58 @@
-import React from "react";
-import GoogleLogo from "../Assets/google.svg";
-import { useEffect } from "react";
-import Image from "next/image";
-const LoginPage = () => {
-  const google_api_login = () => {
-    // Correctly set the redirect URL
-    const redirectUrl = 'https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=http://localhost:3000/onBox';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import LoginPageBar from '../components/LoginPageBar';
+import Image from 'next/image';
+import google from '../assets/google.svg';
+import Link from 'next/link';
 
-    // Redirect directly to Google sign-in URL
-    window.location.href = redirectUrl;
+const Login = () => {
+  const router = useRouter();
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    console.log('Stored Token:', token); // Check if token is retrieved correctly
+    if (token) {
+      router.push('/onBox'); // Redirect to home if token exists
+    }
+  }, [router]);
+
+  const handleGoogleLogin = () => {
+    // Redirect to Google login URL
+    window.location.href = "https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=http://localhost:3000";
   };
 
   return (
-    <div className="flex w-full h-screen items-center justify-center bg-[#121212]">
-      <div className="flex flex-col w-[460px] h-auto items-center bg-gradient-to-l from-[#111214] to-[#121212] border border-[#343A40] rounded-md p-6 gap-4">
-        <h1 className="text-white text-lg font-semibold">Create a new account</h1>
-        
-        <button 
-          className="flex items-center justify-center w-full h-[48px] border border-[#707172] rounded cursor-pointer hover:bg-[#1a1a1a] gap-2"
-          onClick={google_api_login} // Call function on click
-        >
-          {/* <img src={GoogleLogo} alt="Google Logo" className="w-5 h-5" /> */}
-          <Image src={GoogleLogo} alt="Google Logo" className="w-5 h-5" />
-          <span className="text-white font-medium">Sign Up with Google</span>
-        </button>
-        
-        <button 
-          className="w-[195px] h-[48px] bg-gradient-to-r from-[#4B63DD] to-[#0524BF] text-white rounded-md font-semibold"
-          onClick={google_api_login} // Call function on click
-        >
-          Create an Account
-        </button>
-        
-        <p className="text-sm text-[#707172]">
-          Already have an account?{" "}
-          <a href="/login" className="text-[#007BFF] hover:underline">
-            Sign In
-          </a>
-        </p>
+    <div>
+      <LoginPageBar />
+      <div className="bg-black text-white w-screen h-screen flex flex-col justify-center items-center">
+        <div className="bg-[#111214] text-center space-y-10 px-16 rounded-2xl border border-[#343A40]">
+          <div className="">
+            <div className="text-xl font-semibold mt-6">
+              Create a new account
+            </div>
+            <div
+              className="mt-6 border-white/40 border px-20 py-2 text-sm flex items-center text-[#CCCCCC] rounded-lg cursor-pointer"
+              onClick={handleGoogleLogin}
+            >
+              <Image src={google} alt="google" className="w-4 mr-3" />
+              Sign Up with Google
+            </div>
+          </div>
+          <div className="">
+            <Link href="/login" className="bg-gradient-to-r from-[#4B63DD] to-[#0524BFFC] mx-16 mt-5 px-6 text-sm py-3 rounded-md cursor-pointer">
+              Create an Account
+            </Link>
+            <div className="my-8 mb-10 text-[#909296]">
+              Already have an account?{" "}
+              <Link href="/signin" className="text-[#C1C2C5]">
+                Sign In
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
-export default LoginPage;
+
+export default Login;

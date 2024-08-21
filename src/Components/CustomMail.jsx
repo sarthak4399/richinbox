@@ -1,58 +1,42 @@
 import axios from "axios";
 import { useState } from "react";
-import { BsLightningChargeFill } from "react-icons/bs";
 import {
+  BsLightningChargeFill,
   FaCaretDown,
   FaEye,
   FaImage,
   FaRegSmile,
   FaUserMinus,
-} from "react-icons/fa";
-import { IoMdCode } from "react-icons/io";
-import { IoLinkSharp } from "react-icons/io5";
-import { RxCross2 } from "react-icons/rx";
-import { TbSquareLetterA } from "react-icons/tb";
+  IoMdCode,
+  IoLinkSharp,
+  RxCross2,
+  TbSquareLetterA,
+} from "react-icons/all";
 
-function ReplyModal({ threadId, onClose }) {
+function CustomMail({ threadId, onClose }) {
   const [replyData, setReplyData] = useState({
     to: "",
     from: "",
     subject: "",
     body: "",
   });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const handleSendReply = async () => {
-    if (!replyData.to || !replyData.from || !replyData.subject || !replyData.body) {
-      setError("All fields are required.");
-      return;
-    }
-
-    setLoading(true);
-    setError("");
     const token = localStorage.getItem("token");
-
     try {
       await axios.post(
         `https://hiring.reachinbox.xyz/api/v1/onebox/reply/${threadId}`,
-        {
-          to: replyData.to,
-          from: replyData.from,
-          subject: replyData.subject,
-          body: replyData.body,
-        },
+        replyData,
         {
           headers: {
             Authorization: token,
           },
         }
       );
-      onClose(); // Close the CustomMail component
+      console.log("Reply sent successfully");
+      onClose(); // Close the CustomMail component on successful reply
     } catch (error) {
-      setError("Failed to send the reply. Please try again.");
-    } finally {
-      setLoading(false);
+      console.error("Error sending reply:", error);
     }
   };
 
@@ -81,43 +65,37 @@ function ReplyModal({ threadId, onClose }) {
             <RxCross2 className="text-xl cursor-pointer" />
           </div>
         </div>
+        <div className="flex text-sm py-2 border-b border-[#41464B] pl-8">
+          <div className="text-[#BAB9BD]">To :</div>
+          <input
+            className="bg-transparent ml-4"
+            placeholder="Recipient's Email"
+            name="to"
+            value={replyData.to}
+            onChange={handleInputChange}
+          />
+        </div>
 
-        <div className="flex flex-col py-2 border-b border-[#41464B] pl-8 space-y-2">
-          <div className="flex items-center">
-            <div className="text-[#BAB9BD]">To :</div>
-            <input
-              className="bg-transparent ml-4"
-              placeholder="Recipient's Email"
-              name="to"
-              value={replyData.to}
-              onChange={handleInputChange}
-              aria-label="Recipient's Email"
-            />
-          </div>
+        <div className="flex text-sm py-2 border-b border-[#41464B] pl-8">
+          <div className="text-[#BAB9BD]">From :</div>
+          <input
+            className="bg-transparent ml-4"
+            placeholder="Your Email"
+            name="from"
+            value={replyData.from}
+            onChange={handleInputChange}
+          />
+        </div>
 
-          <div className="flex items-center">
-            <div className="text-[#BAB9BD]">From :</div>
-            <input
-              className="bg-transparent ml-4"
-              placeholder="Your Email"
-              name="from"
-              value={replyData.from}
-              onChange={handleInputChange}
-              aria-label="Your Email"
-            />
-          </div>
-
-          <div className="flex items-center">
-            <div className="text-[#BAB9BD]">Subject :</div>
-            <input
-              className="bg-transparent ml-4"
-              placeholder="Subject"
-              name="subject"
-              value={replyData.subject}
-              onChange={handleInputChange}
-              aria-label="Email Subject"
-            />
-          </div>
+        <div className="flex text-sm py-2 border-b border-[#41464B] pl-8">
+          <div className="text-[#BAB9BD]">Subject :</div>
+          <input
+            className="bg-transparent ml-4"
+            placeholder="Subject"
+            name="subject"
+            value={replyData.subject}
+            onChange={handleInputChange}
+          />
         </div>
 
         <div className="flex text-sm py-2 border-b border-[#41464B] px-4 pr-8 pt-8 h-2/3">
@@ -127,22 +105,16 @@ function ReplyModal({ threadId, onClose }) {
             name="body"
             value={replyData.body}
             onChange={handleTextAreaChange}
-            aria-label="Message Body"
           />
         </div>
 
-        {error && (
-          <div className="text-red-500 text-center mt-2">{error}</div>
-        )}
-
         <div className="flex space-x-8 items-center h-16 ml-8">
-          <button
+          <div
             className="bg-gradient-to-r from-[#4B63DD] to-[#0524BFFC] px-5 py-2 rounded-md flex items-center cursor-pointer"
             onClick={handleSendReply}
-            disabled={loading}
           >
-            {loading ? "Sending..." : "Send"} <FaCaretDown className="ml-4" />
-          </button>
+            Send <FaCaretDown className="ml-4" />
+          </div>
           <div className="flex items-center text-[#ADADAD]">
             <BsLightningChargeFill className="mr-3" />
             Variables
@@ -165,4 +137,4 @@ function ReplyModal({ threadId, onClose }) {
   );
 }
 
-export default ReplyModal;
+export default CustomMail;
