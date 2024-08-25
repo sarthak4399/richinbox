@@ -32,7 +32,7 @@ function OneBox() {
 
   return (
     <div className="h-screen w-screen dark:bg-black bg-white pl-14">
-      <SideBar onMenuItemClick={handleMenuItemClick} />
+      <SideBar onMenuItemClick={handleMenuItemClick} className=" bg-red-500"/>
       <TopBar />
       <div>
         {selectedComponent === '/search' && <SubView />}
