@@ -1,17 +1,17 @@
 import axios from "axios";
 import { useState } from "react";
+import { BsLightningChargeFill } from "react-icons/bs";
 import {
-  BsLightningChargeFill,
   FaCaretDown,
   FaEye,
   FaImage,
   FaRegSmile,
   FaUserMinus,
-  IoMdCode,
-  IoLinkSharp,
-  RxCross2,
-  TbSquareLetterA,
-} from "react-icons/all";
+} from "react-icons/fa";
+import { IoMdCode } from "react-icons/io";
+import { IoLinkSharp } from "react-icons/io5";
+import { RxCross2 } from "react-icons/rx";
+import { TbSquareLetterA } from "react-icons/tb";
 
 function CustomMail({ threadId, onClose }) {
   const [replyData, setReplyData] = useState({
@@ -22,11 +22,17 @@ function CustomMail({ threadId, onClose }) {
   });
 
   const handleSendReply = async () => {
+    // Make a POST request to send the reply
     const token = localStorage.getItem("token");
     try {
       await axios.post(
         `https://hiring.reachinbox.xyz/api/v1/onebox/reply/${threadId}`,
-        replyData,
+        {
+          to: replyData.to,
+          from: replyData.from,
+          subject: replyData.subject,
+          body: replyData.body,
+        },
         {
           headers: {
             Authorization: token,
@@ -34,7 +40,8 @@ function CustomMail({ threadId, onClose }) {
         }
       );
       console.log("Reply sent successfully");
-      onClose(); // Close the CustomMail component on successful reply
+      onClose(); // Close the CustomMail component
+      alert("Reply sent successfully");
     } catch (error) {
       console.error("Error sending reply:", error);
     }

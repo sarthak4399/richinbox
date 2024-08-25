@@ -1,5 +1,6 @@
 import React from "react";
 
+
 function DeletePopUp({ onCancel, onDelete }) {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-[#8484847D] bg-opacity-50 z-50">

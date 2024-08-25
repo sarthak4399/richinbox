@@ -1,12 +1,11 @@
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { MdOutlineExpand } from "react-icons/md";
 import { FaReply } from "react-icons/fa";
 import { SlArrowDown } from "react-icons/sl";
 import { GoDotFill } from "react-icons/go";
-// import CustomMail from "./CustomMail";
-// import DeletePopUp from "./DeletePopUp";
+import CustomMail from "./CustomMail";
+import DeletePopUp from "./DeletePopUp";
 
 function Thrade({ selectedThread }) {
   const [showPopUp, setShowPopUp] = useState(false);
@@ -83,6 +82,32 @@ function Thrade({ selectedThread }) {
     };
     fetchMail();
   }, [selectedThread, showDelete]);
+  const handleSendReply = async () => {
+    // Make a POST request to send the reply
+    const token = localStorage.getItem("token");
+    try {
+      await axios.post(
+        `https://hiring.reachinbox.xyz/api/v1/onebox/reply/${threadId}`,
+        {
+          to: replyData.to,
+          from: replyData.from,
+          subject: replyData.subject,
+          body: replyData.body,
+        },
+
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      alert("Reply sent successfully");
+    } catch (error) {
+      console.error("Error sending reply:", error
+      );
+    }
+
+  };
 
   return (
     <div className="overflow-y-scroll no-scrollbar h-full">
@@ -146,7 +171,7 @@ function Thrade({ selectedThread }) {
         className="cursor-pointer flex items-center fixed bottom-0 ml-10 mb-10 bg-gradient-to-r from-[#4B63DD] to-[#0524BFFC] rounded-md px-10 py-2"
         onClick={togglePopUp}
       >
-        <FaReply className="mr-2 text-xl" /> Reply
+        <FaReply className="mr-2 text-xl" onClick={handleSendReply()} /> Reply
       </div>
 
       {showDelete && (

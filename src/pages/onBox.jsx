@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import SubView from '../Components/SubView';
-import MainPage from '../Components/Main';
+import Main from '../Components/Main';
 import SideBar from '../Components/sidebar';
 import TopBar from '../Components/TopBar';
 
@@ -39,7 +39,7 @@ function OneBox() {
         {selectedComponent === '/mail' && <SubView />}
         {selectedComponent === '/send' && <SubView />}
         {selectedComponent === '/stack' && <SubView />}
-        {selectedComponent === '/inbox' && <MainPage />}
+        {selectedComponent === '/inbox' && <Main />}
         {selectedComponent === '/stacks' && <SubView />}
       </div>
     </div>

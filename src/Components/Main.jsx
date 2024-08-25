@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AllInbox from "./Allmails";
-import CenterPage from "./Thrade";
+import Thrade from "./Thrade";
 import RightSection from "./RightSection";
 
 function Main() {
@@ -52,7 +52,7 @@ function Main() {
         <AllInbox data={datas} loadMail={loadMail} />
       </div>
       <div className="w-2/4">
-        <CenterPage selectedThread={selectedThread} />
+        <Thrade selectedThread={selectedThread} />
       </div>
       <div className="w-1/4">
         <RightSection />
