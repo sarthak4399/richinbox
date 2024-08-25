@@ -33,13 +33,11 @@ const SideBar = ({ onMenuItemClick }) => {
     localStorage.setItem("isDarkMode", !isDarkMode);
   };
 
-  const sidebarClasses = isDarkMode
-    ? "bg-[#101113] border-[#343A40]"
-    : "bg-white border-[#E0E0E0]";
+  const sidebarClasses = isDarkMode ? "bg-white border-[#E0E0E0]" : "bg-[#101113] border-[#343A40]";
 
   return (
     <div
-      className={`overflow-y-scroll no-scrollbar h-screen w-[70px] flex flex-col justify-between items-center py-6 border-r-2 left-0 top-0 fixed z-10 ${sidebarClasses}`}
+      className={`dark:bg overflow-y-scroll no-scrollbar h-screen w-[70px] flex flex-col justify-between items-center py-6 border-r-2 left-0 top-0 fixed z-10 ${sidebarClasses}`}
     >
       {/* Mail Logo */}
       <div className="w-[48px] h-[48px] mb-8">
